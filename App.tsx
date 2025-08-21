@@ -1,23 +1,29 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Layout from "./app/layout";
+import Login from "./app/login";
+import UserHome from "./app/userHome";
+
+const Stack = createStackNavigator();
 
 export default function App() {
+  console.log('1')
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello from React Native + Electron 🚀</Text>
-    </View>
+    <Layout>
+      <NavigationContainer>
+        <Stack.Navigator 
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false,
+            cardStyle: { backgroundColor: 'transparent' }
+          }}
+        >
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="UserHome" component={UserHome} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Layout>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#282c34",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 24,
-    color: "#61dafb",
-  },
-});
